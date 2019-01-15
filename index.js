@@ -8,7 +8,8 @@ const archiveHandler	= require('./lib/archivehandler');
 const requestHandler	= require('./lib/requesthandler');
 const generateHandler	= require('./lib/generatehandler');
 const constants 		= require("./lib/constants");
-const status 			= require("./lib/status");
+const Status 			= require("./lib/status");
+const status			= new Status();
 
 self = module.exports =  {
 
@@ -24,7 +25,7 @@ self = module.exports =  {
 			if ( inputToken ) {	// authenticate the token from the remote server
 				await user.authenticate(inputToken, function(err, data){
 			    	if ( err )  {
-			    		reject( new status.Status().error(err, constants.TOKEN_VALIDATION_ERROR ) );
+			    		reject( status.error(err, constants.TOKEN_VALIDATION_ERROR ) );
 			    	}else {
 			    		if ( data.resultCode == constants.SUCCESS ) {
 			    			if (inputToken == JSON.parse(data.result).token) {
@@ -33,12 +34,12 @@ self = module.exports =  {
 			    			}
 			    		} 
 			    		else
-			    			reject( new status.Status().error("", constants.TOKEN_VALIDATION_ERROR ) ); 
+			    			reject( status.error("", constants.TOKEN_VALIDATION_ERROR ) ); 
 			    	}
 			    });
 			}
 			else
-				reject( new status.Status().error("", constants.TOKEN_VALIDATION_ERROR ) );
+				reject( status.error("", constants.TOKEN_VALIDATION_ERROR ) );
 		});
 	},
 
@@ -80,7 +81,7 @@ self = module.exports =  {
 	registerModel : (yamlFile, scope) => {	
 		return new Promise(function(resolve,reject) {
 			if ( yamlFile == null )
-				reject( new status.Status().error(null, "Invalid YAML file provided." ));
+				reject( status.error(null, "Invalid YAML file provided." ));
 			else {
 				modelHandler.register(yamlFile, scope == null ? constants.PRIVATE : scope)
 					.then(function(result) {
@@ -155,7 +156,7 @@ self = module.exports =  {
 	registerTechStack : (yamlFile, scope) => {	
 		return new Promise(function(resolve, reject) {
 			if ( yamlFile == null )
-				reject( new status.Status().error(null, "Invalid YAML file provided." ) );
+				reject( status.error(null, "Invalid YAML file provided." ) );
 			else {
 				techStackHandler.register(yamlFile, scope == null ? constants.PRIVATE : scope)
 				 .then(function(result) {
@@ -226,7 +227,7 @@ self = module.exports =  {
 	generateApps : (yamlFilePath) => {
 		return new Promise(function(resolve, reject) {
 			if ( yamlFilePath == null )
-				reject( new status.Status().error( null, "Invalid YAML file provided." ) );
+				reject( status.error( null, "Invalid YAML file provided." ) );
 			else {	
 				generateHandler.generateApps(yamlFilePath)
 					.then(function(result) {
