@@ -2,7 +2,7 @@
   // module configs
   "realMethods": {
     "serverConfig": {
-      "host": "http://platform.realmethods.com",
+      "host": "http://18.235.138.220",
       "port": 8080, // jetty:9900, tomcat:8080
       "endpoint": "/realMethods-7.1/service"
     },  
