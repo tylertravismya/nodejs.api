@@ -8,6 +8,7 @@ const archiveHandler	= require('./lib/archivehandler');
 const requestHandler	= require('./lib/requesthandler');
 const generateHandler	= require('./lib/generatehandler');
 const constants 		= require("./lib/constants");
+const Status 			= require("./lib/status");
 
 self = module.exports =  {
 
