@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+process.env["NODE_CONFIG_DIR"] = __dirname + "/config/";
 
 const user				= require('./lib/user');
 const modelHandler		= require('./lib/modelhandler');

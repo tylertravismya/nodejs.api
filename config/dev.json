@@ -2,7 +2,7 @@
   // module configs
   "realMethods": {
     "serverConfig": {
-      "host": "http://platform.realmethods.com",
+      "host": "localhost", 
       "port": 8080, // jetty:9900, tomcat:8080
       "endpoint": "/realMethods-7.1/service"
     },  
@@ -13,7 +13,7 @@
     "publicRmTechStacksRootDir": 'public/realMethods/techstacks/',
     "protocol": "https://", 
     "s3ServerUrl": 's3.amazonaws.com/',
-    "bucket" : "goframework-cli-bucket", // secure bucket is goframeworksecurebucket
+    "bucket" : "goframework-cli-bucket", 
     "accessKeyId": "AKIAJGP7A54MM3WPRA4Q",
     "secretAccessKey": "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" 
    }
