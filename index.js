@@ -23,7 +23,7 @@ self = module.exports =  {
 			if ( inputToken ) {	// authenticate the token from the remote server
 				await user.authenticate(inputToken, function(err, data){
 			    	if ( err )  {
-			    		reject( new constants.Status().error(err, constants.TOKEN_VALIDATION_ERROR ) );
+			    		reject( new Status().error(err, constants.TOKEN_VALIDATION_ERROR ) );
 			    	}else {
 			    		if ( data.resultCode == constants.SUCCESS ) {
 			    			if (inputToken == JSON.parse(data.result).token) {
@@ -32,12 +32,12 @@ self = module.exports =  {
 			    			}
 			    		} 
 			    		else
-			    			resolve( new constants.Status().error("", constants.TOKEN_VALIDATION_ERROR ) ); 
+			    			reject( new Status().error("", constants.TOKEN_VALIDATION_ERROR ) ); 
 			    	}
 			    });
 			}
 			else
-				reject( new constants.Status().error("", constants.TOKEN_VALIDATION_ERROR ) );
+				reject( new Status().error("", constants.TOKEN_VALIDATION_ERROR ) );
 		});
 	},
 
@@ -79,7 +79,7 @@ self = module.exports =  {
 	registerModel : (yamlFile, scope) => {	
 		return new Promise(function(resolve,reject) {
 			if ( yamlFile == null )
-				reject( new constants.Status().error(null, "Invalid YAML file provided." ));
+				reject( new Status().error(null, "Invalid YAML file provided." ));
 			else {
 				modelHandler.register(yamlFile, scope == null ? constants.PRIVATE : scope)
 					.then(function(result) {
@@ -154,7 +154,7 @@ self = module.exports =  {
 	registerTechStack : (yamlFile, scope) => {	
 		return new Promise(function(resolve, reject) {
 			if ( yamlFile == null )
-				reject( new constants.Status().error(null, "Invalid YAML file provided." ) );
+				reject( new Status().error(null, "Invalid YAML file provided." ) );
 			else {
 				techStackHandler.register(yamlFile, scope == null ? constants.PRIVATE : scope)
 				 .then(function(result) {
@@ -225,7 +225,7 @@ self = module.exports =  {
 	generateApps : (yamlFilePath) => {
 		return new Promise(function(resolve, reject) {
 			if ( yamlFilePath == null )
-				reject( new constants.Status().error( null, "Invalid YAML file provided." ) );
+				reject( new Status().error( null, "Invalid YAML file provided." ) );
 			else {	
 				generateHandler.generateApps(yamlFilePath)
 					.then(function(result) {
