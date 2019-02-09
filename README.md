@@ -420,16 +420,16 @@ realmethods.stackOptions(id)
 
 ----------------------------
 
-#### generateApps
+#### generateApp
 
 Generates one or more applications using the directives of a YAML file. 
 
-This YAML file allows the listing of one ore more application directives including a model identifier, technology stack identifier, Gitptions and more.
+This YAML file allows the declarion of an application generation directive including a model identifier, technology stack identifier, Git options and more.
 
 #### Example:
 
 ```
-realmethods.generateApps(yaml_file)
+realmethods.generateApp(yaml_file)
 	.then(function(data){
 		console.log(data);
 }).catch(err => console.log(err));
@@ -440,29 +440,6 @@ realmethods.generateApps(yaml_file)
 - yaml_file - path and name of the YAML file.
 
 -------------------
-
-#### generateApp
-
-Generate an application using the designated model, technology stack package, and an application options file.
-
-In general, it is a convenience method.  Using the *generateApps* command (see above) is a more robust means of generating one or more applications.
-
-#### Example:
-
-```
-realmethods.generateApp(stack_id, model_id, app_options_path)
-	.then(function(data){
-		console.log(data);
-}).catch(err => console.log(err));
-```
-
-#### Options
-
-- stack_id - The unique identifier of a registered technology stack package.
-- model_id - The unique identified of a registered model.
-- app_options_path - The path and file of the application options, possibly previously downloaded using the __stackOptions__ command
-
-----------------------------
 
 #### downloadApp
 
