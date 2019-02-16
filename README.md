@@ -422,9 +422,11 @@ realmethods.stackOptions(id)
 
 #### generateApp
 
-Generates one or more applications using the directives of a YAML file. 
+Generates an application using the directives of a YAML file. 
 
-This YAML file allows the declarion of an application generation directive including a model identifier, technology stack identifier, Git options and more.
+This YAML file allows the description of an application generation directive including a model identifier, technology stack identifier, Git options and more.
+
+A model identifier can be either a model YAML file or an ID of an already published model file.
 
 #### Example:
 
