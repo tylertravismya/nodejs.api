@@ -4,7 +4,7 @@
     "serverConfig": {
       "host": "http://localhost", 
       "port": 8080, // jetty:9900, tomcat:8080
-      "endpoint": "/realMethods-7.1/service"
+      "endpoint": "/realmethods-7.1/service"
     },  
 	"awsS3Config": {
     "region": "us-east-1",
