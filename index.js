@@ -215,25 +215,12 @@ self = module.exports =  {
 	// App Generation Related Functions
 	////////////////////////////////////////////////////
 	
-	generateApp : (tech_stack_id, model_id, app_options_file_path) => {	
+	generateApp : (yamlFilePath, gitFile, appOptionsFile) => {	
 		return new Promise(function(resolve, reject) {
-			generateHandler.generateApp( tech_stack_id, model_id, app_options_file_path )
+			generateHandler.generateApp(yamlFilePath, gitFile, appOptionsFile)
 				.then(function(result) {
 					resolve( result );
 				}).catch(err => reject(err));
-		});
-	},
-	
-	generateApps : (yamlFilePath) => {
-		return new Promise(function(resolve, reject) {
-			if ( yamlFilePath == null )
-				reject( status.error( null, "Invalid YAML file provided." ) );
-			else {	
-				generateHandler.generateApps(yamlFilePath)
-					.then(function(result) {
-						resolve( result );
-					}).catch(err => reject(err));	
-			}
 		});
 	},
 	
