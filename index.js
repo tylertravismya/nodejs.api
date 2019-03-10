@@ -216,6 +216,7 @@ self = module.exports =  {
 	////////////////////////////////////////////////////
 	
 	generateApp : (yamlFilePath, gitFile, appOptionsFile) => {	
+		console.log( yamlFilePath + gitFile + appOptionsFile );
 		return new Promise(function(resolve, reject) {
 			generateHandler.generateApp(yamlFilePath, gitFile, appOptionsFile)
 				.then(function(result) {
