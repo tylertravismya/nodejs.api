@@ -17,8 +17,7 @@ self = module.exports =  {
 	// Handles the authentication of the user,
 	// the user to provide their unique token, assigned
 	// within their profile during registration
-	////////////////////////////////////////////////////
-		
+	////////////////////////////////////////////////////		
 	async authenticate (inputToken)  {
 
 		return new Promise(async function(resolve, reject) {
