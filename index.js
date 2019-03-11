@@ -215,9 +215,9 @@ self = module.exports =  {
 	// App Generation Related Functions
 	////////////////////////////////////////////////////
 	
-	generateApp : (yamlFilePath, gitFile, appOptionsFile) => {	
+	generateApp : (yamlFilePath, gitFile, appOptionsFile, modelIdentifier) => {	
 		return new Promise(function(resolve, reject) {
-			generateHandler.generateApp(yamlFilePath, gitFile, appOptionsFile)
+			generateHandler.generateApp(yamlFilePath, gitFile, appOptionsFile, modelIdentifier)
 				.then(function(result) {
 					resolve( result );
 				}).catch(err => reject(err));
