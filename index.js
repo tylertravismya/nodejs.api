@@ -14,7 +14,7 @@ const status			= new Status();
 self = module.exports =  {
 
 	////////////////////////////////////////////////////
-	// Handles the authentication of the user, 
+	// Handles the authentication of the user,
 	// the user to provide their unique token, assigned
 	// within their profile during registration
 	////////////////////////////////////////////////////
