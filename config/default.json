@@ -14,8 +14,8 @@
     "protocol": "https://", 
     "s3ServerUrl": 's3.amazonaws.com/',
     "bucket" : "goframework-cli-bucket", // secure bucket is goframeworksecurebucket
-    "accessKeyId": "AKIAI6GSRPJJPQGIUYBQ",
-    "secretAccessKey": "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" 
+    "accessKeyId": "AKIAJUMVWY5OZL6OKSVA",
+    "secretAccessKey": "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" 
    }
   }
 }

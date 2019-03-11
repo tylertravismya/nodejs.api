@@ -1,5 +1,5 @@
 config/default.json
+config/dev.json
 node_modules/
 .project
 *svn/
-config/dev.json
