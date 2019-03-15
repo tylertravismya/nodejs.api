@@ -1,0 +1,21 @@
+{
+  // module configs
+  "realMethods": {
+    "serverConfig": {
+      "host": "http://localhost", 
+      "port": 8080, // jetty:9900, tomcat:8080
+      "endpoint": "/realmethods-7.1/service"
+    },  
+	"awsS3Config": {
+    "region": "us-east-1",
+    "apiVersion": '2006-03-01',
+	"s3UsersDir": 'private/users/',
+    "publicRmTechStacksRootDir": 'public/realMethods/techstacks/',
+    "protocol": "https://", 
+    "s3ServerUrl": 's3.amazonaws.com/',
+    "bucket" : "goframework-cli-bucket", 
+    "accessKeyId": "AKIAJHMBFWSLQT57Y4JQ",
+    "secretAccessKey": "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" 
+   }
+  }
+}
