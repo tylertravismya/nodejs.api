@@ -18,15 +18,31 @@ self = module.exports =  {
 	// the user to provide their unique token, assigned
 	// within their profile during registration
 	////////////////////////////////////////////////////		
-	async authenticate (inputToken)  {
+	async authenticate (inputToken, hostUrl)  {
 
 		return new Promise(async function(resolve, reject) {
 			if ( inputToken ) {	// authenticate the token from the remote server
+				const Configstore 	= require('configstore');
+				const conf 			= new Configstore(constants.REALMETHODS);
+
+				// pull from the config
+				if ( hostUrl == undefined || hostUrl == null || hostUrl.length == 0 ) { 
+					var config 			= require('config');
+					var serverConfig 	= config.get(constants.SERVER_CONFIG);
+					var host 			= serverConfig.host;
+					var endPoint 		= serverConfig.endpoint;
+					var port			= serverConfig.port;
+					
+					hostUrl = host + ':' + port + endPoint;
+				}
+				
+				conf.set(constants.PLATFORM_URL, hostUrl);
+				
 				await user.authenticate(inputToken, function(err, data){
 			    	if ( err )  {
 			    		reject( status.error(err, constants.TOKEN_VALIDATION_ERROR ) );
 			    	}else {
-			    		if ( data.resultCode == constants.SUCCESS ) {
+			    		if ( data != null && data.resultCode == constants.SUCCESS ) {
 			    			if (inputToken == JSON.parse(data.result).token) {
 			    				user.storeToken(inputToken);	// authenticated
 			    				resolve( data );
