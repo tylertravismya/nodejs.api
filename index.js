@@ -84,21 +84,21 @@ self = module.exports =  {
 		});
 	},
 
-	validateModel : (file) => {	
+	validateModel : (file, javaRootPackageName) => {	
 		return new Promise(function(resolve,reject) {
-			modelHandler.validate(file)
+			modelHandler.validate(file, javaRootPackageName)
 				.then(function(result) {
 					resolve( result );
 			}).catch(err => reject(err));
 		});
 	},
 	
-	registerModel : (yamlFile, scope) => {	
+	registerModel : (yamlFile, scope, javaRootPackageName ) => {	
 		return new Promise(function(resolve,reject) {
 			if ( yamlFile == null )
 				reject( status.error(null, "Invalid YAML file provided." ));
 			else {
-				modelHandler.register(yamlFile, scope == null ? constants.PRIVATE : scope)
+				modelHandler.register(yamlFile, scope == null ? constants.PRIVATE : scope, javaRootPackageName )
 					.then(function(result) {
 						resolve( result );
 				}).catch(err => reject(err));
