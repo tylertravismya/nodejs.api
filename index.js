@@ -4,6 +4,7 @@ process.env["NODE_CONFIG_DIR"] = __dirname + "/config/";
 const user				= require('./lib/user');
 const modelHandler		= require('./lib/modelhandler');
 const techStackHandler	= require('./lib/techstackhandler');
+const resourceHandler	= require('./lib/resourcehandler');
 const archiveHandler	= require('./lib/archivehandler');
 const requestHandler	= require('./lib/requesthandler');
 const generateHandler	= require('./lib/generatehandler');
@@ -106,27 +107,27 @@ self = module.exports =  {
 		});
 	},
 	
-	downloadModel : (model_id, output_file_path) => {
+	downloadModel : (model_id_or_name, output_file_path) => {
 		return new Promise(function(resolve,reject) {
-			modelHandler.downloadModel( model_id, output_file_path )
+			modelHandler.downloadModel( model_id_or_name, output_file_path )
 				.then(function(result) {
 					resolve(result);
 			}).catch(err => reject(err));
 		});
 	},
 	
-	deleteModel (model_id)  {
+	deleteModel (model_id_or_name)  {
 		return new Promise(function(resolve,reject) {
-			modelHandler.deleteModel(model_id)
+			modelHandler.deleteModel(model_id_or_name)
 				.then(function(result) {
 					resolve( result );
 			}).catch(err => reject(err));
 		});
 	},
 	
-	promoteModel (model_id) {
+	promoteModel (model_id_or_name) {
 		return new Promise(function(resolve,reject) {
-			modelHandler.promoteModel(model_id)
+			modelHandler.promoteModel(model_id_or_name)
 				.then(function(result) {
 					resolve( result );
 			}).catch(err => reject(err));
@@ -134,9 +135,9 @@ self = module.exports =  {
 		
 	},
 
-	demoteModel (model_id) {
+	demoteModel (model_id_or_name) {
 		return new Promise(function(resolve,reject) {
-			modelHandler.demoteModel(model_id)
+			modelHandler.demoteModel(model_id_or_name)
 				.then(function(result) {
 					resolve( result );
 			}).catch(err => reject(err));
@@ -181,50 +182,115 @@ self = module.exports =  {
 		});
 	},
 	
-	stackOptions : (id) => {
+	stackOptions : (stack_name_or_id) => {
 		return new Promise(function(resolve, reject) {
-			techStackHandler.options(id)
+			techStackHandler.options(stack_name_or_id)
 				.then(function(result) {
 					resolve( result );
 			}).catch(err => reject(err));
 		});
 	},
 	
-	downloadStack : (stack_id, output_file_path) => {
+	downloadStack : (stack_name_or_id, output_file_path) => {
 		return new Promise(function(resolve, reject) {
-			techStackHandler.downloadStack( stack_id, output_file_path )
+			techStackHandler.downloadStack( stack_name_or_id, output_file_path )
 				.then(function(result) {
 					resolve( result );
 			}).catch(err => reject(err));
 		});
 	},
 	
-	async deleteStack (stack_id) {
+	async deleteStack (stack_name_or_id) {
 		return new Promise(function(resolve, reject) {
-			techStackHandler.deleteStack(stack_id)
+			techStackHandler.deleteStack(stack_name_or_id)
 				.then(function(result) {
 					resolve( result );
 			}).catch(err => reject(err));
 		});
 	},
 	
-	promoteStack (stack_id) {
+	promoteStack (stack_name_or_id) {
 		return new Promise(function(resolve, reject) {
-			techStackHandler.promoteStack(stack_id)
+			techStackHandler.promoteStack(stack_name_or_id)
 				.then(function(result) {
 					resolve( result );
 				}).catch(err => reject(err));
 		});
 	},
 
-	demoteStack (stack_id) {
+	demoteStack (stack_name_or_id) {
 		return new Promise(function(resolve, reject) {
-			techStackHandler.demoteStack(stack_id)
+			techStackHandler.demoteStack(stack_name_or_id)
 				.then(function(result) {
 					resolve( result );
 			}).catch(err => reject(err));
 		});
 	},
+
+	////////////////////////////////////////////////////
+	// Resource Related Functions
+	////////////////////////////////////////////////////
+
+	listResources : (scope, resourceType) => {	
+		return new Promise(function(resolve, reject) {
+			resourceHandler.list(scope, resourceType)
+				.then(function(result) {
+					resolve( result );
+			}).catch(err => reject(err));
+		});
+	},
+
+	registerResource : (resourceFile, uniqueName, type, scope) => {	
+		return new Promise(function(resolve,reject) {
+			if ( resourceFile == null )
+				reject( status.error(null, "Invalid resource file provided." ));
+			else {
+				resourceHandler.register(resourceFile, uniqueName, type, scope == null ? constants.PRIVATE : scope)
+					.then(function(result) {
+						resolve( result );
+				}).catch(err => reject(err));
+			}
+		});
+	},
+	
+	downloadResource : (resource_name_or_id, output_file_path) => {
+		return new Promise(function(resolve,reject) {
+			resourceHandler.downloadResource( resource_name_or_id, output_file_path )
+				.then(function(result) {
+					resolve(result);
+			}).catch(err => reject(err));
+		});
+	},
+	
+	deleteResource (resource_name_or_id)  {
+		return new Promise(function(resolve,reject) {
+			resourceHandler.deleteResource(resource_name_or_id)
+				.then(function(result) {
+					resolve( result );
+			}).catch(err => reject(err));
+		});
+	},
+	
+	promoteResource (resource_name_or_id) {
+		return new Promise(function(resolve,reject) {
+			resourceHandler.promoteResource(resource_name_or_id)
+				.then(function(result) {
+					resolve( result );
+			}).catch(err => reject(err));
+		});
+		
+	},
+
+	demoteResource (resource_name_or_id) {
+		return new Promise(function(resolve,reject) {
+			resourceHandler.demoteResource(resource_name_or_id)
+				.then(function(result) {
+					resolve( result );
+			}).catch(err => reject(err));
+		});
+		
+	},
+	
 
 	////////////////////////////////////////////////////
 	// App Generation Related Functions
@@ -253,30 +319,30 @@ self = module.exports =  {
 		});
 	},
 	
-	downloadApp : (app_id, output_file_path) => {
-		archiveHandler.downloadApp(app_id, output_file_path)
+	downloadApp : (app_name_or_id, output_file_path) => {
+		archiveHandler.downloadApp(app_name_or_id, output_file_path)
 			.then(function(result) {
 				resolve( result );
 			}).catch(err => reject(err));
 	},
 	
-	deleteApp : (app_id) => {
-		archiveHandler.deleteApp(app_id)
+	deleteApp : (app_name_or_id) => {
+		archiveHandler.deleteApp(app_name_or_id)
 			.then(function(result) {
 				resolve( result );
 			}).catch(err => reject(err));
 
 	},
 	
-	promoteApp : (app_id) => {
-		archiveHandler.promoteApp(app_id)
+	promoteApp : (app_name_or_id) => {
+		archiveHandler.promoteApp(app_name_or_id)
 			.then(function(result) {
 				resolve( result );
 			}).catch(err => reject(err));
 	},
 
-	demoteApp : (app_id) => {
-		archiveHandler.demoteApp(app_id)
+	demoteApp : (app_name_or_id) => {
+		archiveHandler.demoteApp(app_name_or_id)
 			.then(function(result) {
 				resolve( result );
 			}).catch(err => reject(err));
