@@ -327,25 +327,30 @@ self = module.exports =  {
 	},
 	
 	deleteApp : (app_name_or_id) => {
-		archiveHandler.deleteApp(app_name_or_id)
-			.then(function(result) {
-				resolve( result );
-			}).catch(err => reject(err));
-
+		return new Promise(function(resolve,reject) {
+			archiveHandler.deleteApp(app_name_or_id)
+				.then(function(result) {
+					resolve( result );
+				}).catch(err => reject(err));
+		});
 	},
 	
 	promoteApp : (app_name_or_id) => {
-		archiveHandler.promoteApp(app_name_or_id)
-			.then(function(result) {
-				resolve( result );
-			}).catch(err => reject(err));
+		return new Promise(function(resolve,reject) {
+			archiveHandler.promoteApp(app_name_or_id)
+				.then(function(result) {
+					resolve( result );
+				}).catch(err => reject(err));
+		});
 	},
 
 	demoteApp : (app_name_or_id) => {
-		archiveHandler.demoteApp(app_name_or_id)
-			.then(function(result) {
-				resolve( result );
-			}).catch(err => reject(err));
+		return new Promise(function(resolve,reject) {
+			archiveHandler.demoteApp(app_name_or_id)
+				.then(function(result) {
+					resolve( result );
+				}).catch(err => reject(err));
+		});
 	},
 
 }
