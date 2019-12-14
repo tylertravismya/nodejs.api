@@ -94,12 +94,12 @@ self = module.exports =  {
 		});
 	},
 	
-	registerModel : (yamlFile, scope, javaRootPackageName ) => {	
+	registerModel : (yamlFile, scope, javaRootPackageName, primaryKeyPattern ) => {	
 		return new Promise(function(resolve,reject) {
 			if ( yamlFile == null )
 				reject( status.error(null, "Invalid YAML file provided." ));
-			else {
-				modelHandler.register(yamlFile, scope == null ? constants.PRIVATE : scope, javaRootPackageName )
+			else {				
+				modelHandler.register(yamlFile, scope == null ? constants.PRIVATE : scope, javaRootPackageName, primaryKeyPattern )
 					.then(function(result) {
 						resolve( result );
 				}).catch(err => reject(err));
