@@ -8,6 +8,7 @@ const resourceHandler	= require('./lib/resourcehandler');
 const archiveHandler	= require('./lib/archivehandler');
 const requestHandler	= require('./lib/requesthandler');
 const generateHandler	= require('./lib/generatehandler');
+const projectHandler	= require('./lib/projecthandler');
 const constants 		= require("./lib/constants");
 const Status 			= require("./lib/status");
 const status			= new Status();
@@ -347,6 +348,15 @@ self = module.exports =  {
 	demoteApp : (app_name_or_id) => {
 		return new Promise(function(resolve,reject) {
 			archiveHandler.demoteApp(app_name_or_id)
+				.then(function(result) {
+					resolve( result );
+				}).catch(err => reject(err));
+		});
+	},
+
+	saveProject : (yamlFilePath) => {
+		return new Promise(function(resolve,reject) {
+			projectHandler.saveProject(yamlFilePath)
 				.then(function(result) {
 					resolve( result );
 				}).catch(err => reject(err));
